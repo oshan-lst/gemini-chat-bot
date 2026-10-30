@@ -174,3 +174,15 @@ body {
     font-size: 0.95rem;
     line-height: 1.6;
 }
+/* User Message */
+.user-msg-bubble {
+    background-color: #2f2f2f;
+    color: #ececec;
+    max-width: 85%;
+    word-break: break-word;
+}
+
+body:not(.dark-mode) .user-msg-bubble {
+    background-color: #f4f4f4;
+    color: #212121;
+}
