@@ -29,7 +29,7 @@ const requestOptions = {
   redirect: "follow"
 };
 
-fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent", requestOptions)
+fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent", requestOptions)
   .then((response) => response.json())
   .then((result) => {
     document.getElementById("lblRespond").innerHTML = DOMPurify.sanitize(marked.parse(result.candidates[0].content.parts[0].text));

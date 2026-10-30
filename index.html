@@ -3,18 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Max-chat-Bot</title>
-    <link rel="stylesheet" href="assets/style.css"
+    <title>Max-Chat-Bot</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
+<body class="dark-mode"> <!-- Default Dark Mode Class -->
 
-    <div id="respond"></div>
-    <input type="text" placeholder="Type your message..." id="txtUserInput"/>
-    <input type="button" value="send" onclick="btnSendMessageOnAction()"/>  
+    <div class="d-flex vh-100 overflow-hidden w-100">
+        
+        <!-- Sidebar -->
+        <div class="sidebar p-3 d-none d-md-flex flex-column justify-content-between">
+            <div>
+                <!-- New Chat Button with ID and onclick function -->
+                <button class="btn btn-outline-light w-100 text-start d-flex align-items-center gap-2 rounded-3 mb-3 py-2 px-3" onclick="btnNewChatOnAction()">
+                    <i class="fa-solid fa-plus"></i> New chat
+                </button>
+                
+                <div class="sidebar-menu small text-secondary fw-semibold px-2 mb-2">Recent</div>
+                <div class="chat-history-list">
+                    <div class="history-item text-truncate active">
+                        <i class="fa-regular fa-message me-2"></i> Max-Chat-Bot Session
+                    </div>
+                </div>
+            </div>
 
-    <div id="lblRespond"></div>
+            <div class="sidebar-footer border-top pt-3 d-flex align-items-center justify-content-between px-2">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="user-avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold">
+                        M
+                    </div>
+                    <div class="fw-semibold username-text">Max User</div>
+                </div>
+                <!-- Dark / Light Mode Toggle Button -->
+                <button class="btn btn-sm theme-toggle-btn" onclick="toggleTheme()" title="Toggle Theme">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
 
-    <!--cdn-->
+        <!-- Main Chat Area -->
+        <div class="main-chat flex-grow-1 d-flex flex-column position-relative">
+            
+            <!-- Top Navbar -->
+            <div class="chat-topbar d-flex align-items-center justify-content-between px-4 py-3 border-bottom">
+                <div class="d-flex align-items-center gap-2">
+                    <h5 class="m-0 fw-bold title-text">Max-Chat-Bot</h5>
+                    <span class="badge bg-secondary-subtle text-secondary border rounded-pill">Gemini AI</span>
+                </div>
+                <div class="d-flex gap-2">
+                    <!-- Mobile Dark Mode Button -->
+                    <button class="btn btn-sm theme-toggle-btn d-md-none" onclick="toggleTheme()"><i class="fa-solid fa-moon" id="mobileThemeIcon"></i></button>
+                    <button class="btn btn-sm btn-outline-secondary border d-md-none" onclick="btnNewChatOnAction()"><i class="fa-solid fa-plus"></i></button>
+                </div>
+            </div>
+
+            <!-- Messages Scroll Area -->
+            <div class="chat-body flex-grow-1 overflow-auto p-3 p-md-4" id="chatBox">
+                <div class="chat-wrapper mx-auto">
+                    
+                    <!-- Bot Welcome Message -->
+                    <div class="d-flex gap-3 mb-4 fade-in">
+                        <div class="avatar-icon bot-avatar text-white rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <div class="msg-content flex-grow-1">
+                            <div class="fw-bold mb-1 title-text">Max-Chat-Bot</div>
+                            <div class="text-secondary-custom">
+                                Hello! 👋 I'm <strong>Max-Chat-Bot</strong>. How can I help you today?
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Original Respond Element -->
+                    <div class="d-flex gap-3 mb-4 fade-in">
+                        <div class="avatar-icon bot-avatar text-white rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <div class="msg-content flex-grow-1">
+                            <div class="fw-bold mb-1 title-text">Max-Chat-Bot</div>
+                            <div id="lblRespond" class="text-content-custom"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Floating Input Area -->
+            <div class="chat-footer p-3 p-md-4">
+                <div class="chat-wrapper mx-auto">
+                    <div class="input-box-container d-flex align-items-center rounded-4 px-3 py-2 shadow-sm">
+                        <input type="text" class="form-control border-0 bg-transparent shadow-none" placeholder="Message Max-Chat-Bot..." id="txtUserInput"/>
+                        <button class="btn btn-dark rounded-circle p-0 d-flex align-items-center justify-content-center send-btn" type="button" onclick="btnSendMessageOnAction()">
+                            <i class="fa-solid fa-arrow-up"></i>
+                        </button>
+                    </div>
+                    <div class="text-center text-muted tiny-text mt-2">
+                        Max-Chat-Bot can make mistakes. Check important info.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CDNs -->
     <script src="https://cdn.jsdelivr.net/npm/marked@4.0.10/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.4.17/dist/purify.min.js"></script>
 
